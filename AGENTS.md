@@ -7,7 +7,8 @@ This file provides guidance to AI coding agents when working with code in this r
 - **Dev server:** `npm run dev`
 - **Build:** `npm run build` (runs `tsc -b && vite build`)
 - **Preview production build:** `npm run preview`
-- **Format:** `npx prettier --write src/`
+- **Format:** `npm run format`
+- **Check formatting:** `npm run format:check`
 
 No linter or test runner is configured.
 

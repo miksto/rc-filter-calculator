@@ -1,0 +1,73 @@
+.circuit-diagram {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.circuit-diagram__title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.circuit-diagram__svg-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+}
+
+.circuit-diagram__svg-wrap svg {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+.circuit-diagram__svg-wrap svg .wire {
+  stroke: var(--text-secondary);
+  stroke-width: 2;
+  fill: none;
+}
+
+.circuit-diagram__svg-wrap svg .component {
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+}
+
+.circuit-diagram__svg-wrap svg .label {
+  fill: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.circuit-diagram__svg-wrap svg .label-accent {
+  fill: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.circuit-diagram__svg-wrap svg .ground {
+  stroke: var(--text-muted);
+  stroke-width: 2;
+  fill: none;
+}
+
+/* Crossfade animation */
+.circuit-fade-enter {
+  opacity: 0;
+}
+.circuit-fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}

@@ -10,6 +10,9 @@ const FREQ_UNITS: UnitBreakpoint[] = [
   { threshold: 1e3, suffix: 'kHz', divisor: 1e3 },
   { threshold: 1, suffix: 'Hz', divisor: 1 },
   { threshold: 1e-3, suffix: 'mHz', divisor: 1e-3 },
+  { threshold: 1e-6, suffix: 'μHz', divisor: 1e-6 },
+  { threshold: 1e-9, suffix: 'nHz', divisor: 1e-9 },
+  { threshold: 0, suffix: 'pHz', divisor: 1e-12 },
 ];
 
 const RESISTANCE_UNITS: UnitBreakpoint[] = [
@@ -20,10 +23,10 @@ const RESISTANCE_UNITS: UnitBreakpoint[] = [
 ];
 
 const CAPACITANCE_UNITS: UnitBreakpoint[] = [
-  { threshold: 1e-3, suffix: 'F', divisor: 1 },
-  { threshold: 1e-6, suffix: 'mF', divisor: 1e-3 },
-  { threshold: 1e-9, suffix: 'μF', divisor: 1e-6 },
-  { threshold: 1e-12, suffix: 'nF', divisor: 1e-9 },
+  { threshold: 1, suffix: 'F', divisor: 1 },
+  { threshold: 1e-3, suffix: 'mF', divisor: 1e-3 },
+  { threshold: 1e-6, suffix: 'μF', divisor: 1e-6 },
+  { threshold: 1e-9, suffix: 'nF', divisor: 1e-9 },
   { threshold: 0, suffix: 'pF', divisor: 1e-12 },
 ];
 

@@ -16,13 +16,20 @@ const FREQ_UNITS: UnitBreakpoint[] = [
 ];
 
 const RESISTANCE_UNITS: UnitBreakpoint[] = [
+  { threshold: 1e9, suffix: 'GΩ', divisor: 1e9 },
   { threshold: 1e6, suffix: 'MΩ', divisor: 1e6 },
   { threshold: 1e3, suffix: 'kΩ', divisor: 1e3 },
   { threshold: 1, suffix: 'Ω', divisor: 1 },
   { threshold: 1e-3, suffix: 'mΩ', divisor: 1e-3 },
+  { threshold: 1e-6, suffix: 'μΩ', divisor: 1e-6 },
+  { threshold: 1e-9, suffix: 'nΩ', divisor: 1e-9 },
+  { threshold: 0, suffix: 'pΩ', divisor: 1e-12 },
 ];
 
 const CAPACITANCE_UNITS: UnitBreakpoint[] = [
+  { threshold: 1e9, suffix: 'GF', divisor: 1e9 },
+  { threshold: 1e6, suffix: 'MF', divisor: 1e6 },
+  { threshold: 1e3, suffix: 'kF', divisor: 1e3 },
   { threshold: 1, suffix: 'F', divisor: 1 },
   { threshold: 1e-3, suffix: 'mF', divisor: 1e-3 },
   { threshold: 1e-6, suffix: 'μF', divisor: 1e-6 },

@@ -38,7 +38,9 @@
   font-family: var(--font-mono);
   font-size: 0.95rem;
   outline: none;
-  transition: border-color 200ms, box-shadow 200ms;
+  transition:
+    border-color 200ms,
+    box-shadow 200ms;
 }
 
 .param-field__input::placeholder {

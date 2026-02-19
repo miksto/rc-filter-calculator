@@ -26,7 +26,10 @@ function logSpace(fc: number, points: number = 500): number[] {
   return freqs;
 }
 
-export function computeMagnitude(fc: number, filterType: FilterType): PlotPoint[] {
+export function computeMagnitude(
+  fc: number,
+  filterType: FilterType,
+): PlotPoint[] {
   const freqs = logSpace(fc);
   return freqs.map((f) => {
     const ratio = f / fc;

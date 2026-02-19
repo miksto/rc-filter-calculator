@@ -37,7 +37,9 @@ export function PhasePlot({ fc, filterType }: Props) {
           <Line data={data} options={options} />
         </div>
       ) : (
-        <div className="chart-empty">Enter two parameters to see the phase plot</div>
+        <div className="chart-empty">
+          Enter two parameters to see the phase plot
+        </div>
       )}
     </div>
   );

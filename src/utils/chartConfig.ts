@@ -5,7 +5,11 @@ const GRID_COLOR = 'rgba(255, 255, 255, 0.15)';
 const TICK_COLOR = '#c9d1d9';
 const FONT_FAMILY = "'IBM Plex Mono', monospace";
 
-function baseOptions(yLabel: string, yMin: number, yMax: number): ChartOptions<'line'> {
+function baseOptions(
+  yLabel: string,
+  yMin: number,
+  yMax: number,
+): ChartOptions<'line'> {
   return {
     responsive: true,
     maintainAspectRatio: false,

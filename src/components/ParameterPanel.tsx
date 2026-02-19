@@ -1,6 +1,10 @@
 import type { SolveFor } from '../types';
 import { ParameterField } from './ParameterField';
-import { formatResistance, formatCapacitance, formatFrequency } from '../utils/formatters';
+import {
+  formatResistance,
+  formatCapacitance,
+  formatFrequency,
+} from '../utils/formatters';
 import { parseEngNotation } from '../utils/parseEngNotation';
 import './ParameterPanel.css';
 
@@ -31,9 +35,18 @@ export function ParameterPanel({
   const cValid = !cInput || !isNaN(parseEngNotation(cInput));
   const fcValid = !fcInput || !isNaN(parseEngNotation(fcInput));
 
-  const computedR = solveFor === 'R' && computedValue !== null ? `= ${formatResistance(computedValue)}` : null;
-  const computedC = solveFor === 'C' && computedValue !== null ? `= ${formatCapacitance(computedValue)}` : null;
-  const computedFc = solveFor === 'fc' && computedValue !== null ? `= ${formatFrequency(computedValue)}` : null;
+  const computedR =
+    solveFor === 'R' && computedValue !== null
+      ? `= ${formatResistance(computedValue)}`
+      : null;
+  const computedC =
+    solveFor === 'C' && computedValue !== null
+      ? `= ${formatCapacitance(computedValue)}`
+      : null;
+  const computedFc =
+    solveFor === 'fc' && computedValue !== null
+      ? `= ${formatFrequency(computedValue)}`
+      : null;
 
   return (
     <div className="param-panel">

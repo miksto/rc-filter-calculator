@@ -2,7 +2,11 @@ import { useState, useMemo, useCallback, useRef } from 'react';
 import type { FilterType, SolveFor } from './types';
 import { parseEngNotation } from './utils/parseEngNotation';
 import { solveFc, solveC, solveR } from './utils/filterMath';
-import { toEngResistance, toEngCapacitance, toEngFrequency } from './utils/formatters';
+import {
+  toEngResistance,
+  toEngCapacitance,
+  toEngFrequency,
+} from './utils/formatters';
 import { FilterToggle } from './components/FilterToggle';
 import { ParameterPanel } from './components/ParameterPanel';
 import { CircuitDiagram } from './components/CircuitDiagram';
@@ -22,10 +26,14 @@ export default function App() {
   const editOrder = useRef<SolveFor[]>(['C', 'R']);
 
   const markEdited = useCallback((field: SolveFor) => {
-    editOrder.current = [field, ...editOrder.current.filter((f) => f !== field)].slice(0, 2);
+    editOrder.current = [
+      field,
+      ...editOrder.current.filter((f) => f !== field),
+    ].slice(0, 2);
     // The field NOT in the last-two-edited becomes the solve target
     const allFields: SolveFor[] = ['R', 'C', 'fc'];
-    const newSolveFor = allFields.find((f) => !editOrder.current.includes(f)) ?? 'fc';
+    const newSolveFor =
+      allFields.find((f) => !editOrder.current.includes(f)) ?? 'fc';
     setSolveFor(newSolveFor);
   }, []);
 

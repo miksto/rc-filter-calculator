@@ -55,7 +55,7 @@
 
 .param-field__input--computed {
   border-color: var(--border-computed);
-  background: rgba(0, 255, 136, 0.04);
+  background: var(--accent-faint);
   color: var(--accent);
   font-weight: 500;
 }

@@ -1,14 +1,49 @@
 import type { ChartOptions } from 'chart.js';
 import { formatFrequencyTick } from './formatters';
 
-const GRID_COLOR = 'rgba(255, 255, 255, 0.15)';
-const TICK_COLOR = '#c9d1d9';
 const FONT_FAMILY = "'IBM Plex Mono', monospace";
+
+interface ChartColors {
+  grid: string;
+  tick: string;
+  tooltipBg: string;
+  tooltipBorder: string;
+  accent: string;
+  accentLabel: string;
+  annotationLine: string;
+  annotationLabel: string;
+}
+
+function getColors(isDark: boolean): ChartColors {
+  if (isDark) {
+    return {
+      grid: 'rgba(255, 255, 255, 0.15)',
+      tick: '#c9d1d9',
+      tooltipBg: 'rgba(14, 17, 23, 0.9)',
+      tooltipBorder: 'rgba(255, 255, 255, 0.1)',
+      accent: 'rgba(0, 255, 136, 0.7)',
+      accentLabel: '#00ff88',
+      annotationLine: 'rgba(255, 255, 255, 0.35)',
+      annotationLabel: 'rgba(255, 255, 255, 0.7)',
+    };
+  }
+  return {
+    grid: 'rgba(0, 0, 0, 0.08)',
+    tick: '#4b5563',
+    tooltipBg: 'rgba(255, 255, 255, 0.95)',
+    tooltipBorder: 'rgba(0, 0, 0, 0.1)',
+    accent: 'rgba(4, 120, 87, 0.7)',
+    accentLabel: '#047857',
+    annotationLine: 'rgba(0, 0, 0, 0.2)',
+    annotationLabel: 'rgba(0, 0, 0, 0.5)',
+  };
+}
 
 function baseOptions(
   yLabel: string,
   yMin: number,
   yMax: number,
+  colors: ChartColors,
 ): ChartOptions<'line'> {
   return {
     responsive: true,
@@ -25,12 +60,12 @@ function baseOptions(
         title: {
           display: true,
           text: 'Frequency (Hz)',
-          color: TICK_COLOR,
+          color: colors.tick,
           font: { family: FONT_FAMILY, size: 12 },
         },
-        grid: { color: GRID_COLOR },
+        grid: { color: colors.grid },
         ticks: {
-          color: TICK_COLOR,
+          color: colors.tick,
           font: { family: FONT_FAMILY, size: 11 },
           callback: function (value: string | number) {
             const v = typeof value === 'number' ? value : Number(value);
@@ -48,14 +83,14 @@ function baseOptions(
         title: {
           display: true,
           text: yLabel,
-          color: TICK_COLOR,
+          color: colors.tick,
           font: { family: FONT_FAMILY, size: 12 },
         },
         min: yMin,
         max: yMax,
-        grid: { color: GRID_COLOR },
+        grid: { color: colors.grid },
         ticks: {
-          color: TICK_COLOR,
+          color: colors.tick,
           font: { family: FONT_FAMILY, size: 11 },
         },
       },
@@ -63,18 +98,24 @@ function baseOptions(
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: 'rgba(14, 17, 23, 0.9)',
+        backgroundColor: colors.tooltipBg,
         titleFont: { family: FONT_FAMILY },
         bodyFont: { family: FONT_FAMILY },
-        borderColor: 'rgba(255,255,255,0.1)',
+        titleColor: colors.tick,
+        bodyColor: colors.tick,
+        borderColor: colors.tooltipBorder,
         borderWidth: 1,
       },
     },
   };
 }
 
-export function magnitudeChartOptions(fc: number | null): ChartOptions<'line'> {
-  const opts = baseOptions('Magnitude (dB)', -60, 6);
+export function magnitudeChartOptions(
+  fc: number | null,
+  isDark: boolean,
+): ChartOptions<'line'> {
+  const colors = getColors(isDark);
+  const opts = baseOptions('Magnitude (dB)', -60, 6, colors);
 
   if (fc !== null) {
     opts.plugins = {
@@ -85,14 +126,14 @@ export function magnitudeChartOptions(fc: number | null): ChartOptions<'line'> {
             type: 'line' as const,
             xMin: fc,
             xMax: fc,
-            borderColor: 'rgba(0, 255, 136, 0.7)',
+            borderColor: colors.accent,
             borderWidth: 1,
             borderDash: [6, 4],
             label: {
               display: true,
               content: 'f_c',
               position: 'start' as const,
-              color: '#00ff88',
+              color: colors.accentLabel,
               font: { family: FONT_FAMILY, size: 11 },
               backgroundColor: 'transparent',
             },
@@ -101,14 +142,14 @@ export function magnitudeChartOptions(fc: number | null): ChartOptions<'line'> {
             type: 'line' as const,
             yMin: -3,
             yMax: -3,
-            borderColor: 'rgba(255, 255, 255, 0.35)',
+            borderColor: colors.annotationLine,
             borderWidth: 1,
             borderDash: [4, 4],
             label: {
               display: true,
               content: '-3 dB',
               position: 'end' as const,
-              color: 'rgba(255, 255, 255, 0.7)',
+              color: colors.annotationLabel,
               font: { family: FONT_FAMILY, size: 10 },
               backgroundColor: 'transparent',
             },
@@ -121,8 +162,12 @@ export function magnitudeChartOptions(fc: number | null): ChartOptions<'line'> {
   return opts;
 }
 
-export function phaseChartOptions(fc: number | null): ChartOptions<'line'> {
-  const opts = baseOptions('Phase (°)', -100, 100);
+export function phaseChartOptions(
+  fc: number | null,
+  isDark: boolean,
+): ChartOptions<'line'> {
+  const colors = getColors(isDark);
+  const opts = baseOptions('Phase (\u00B0)', -100, 100, colors);
 
   if (fc !== null) {
     opts.plugins = {
@@ -133,14 +178,14 @@ export function phaseChartOptions(fc: number | null): ChartOptions<'line'> {
             type: 'line' as const,
             xMin: fc,
             xMax: fc,
-            borderColor: 'rgba(0, 255, 136, 0.7)',
+            borderColor: colors.accent,
             borderWidth: 1,
             borderDash: [6, 4],
             label: {
               display: true,
               content: 'f_c',
               position: 'start' as const,
-              color: '#00ff88',
+              color: colors.accentLabel,
               font: { family: FONT_FAMILY, size: 11 },
               backgroundColor: 'transparent',
             },
